@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "rocketry:items/ores/nugget/Diamond"
+  }
+}

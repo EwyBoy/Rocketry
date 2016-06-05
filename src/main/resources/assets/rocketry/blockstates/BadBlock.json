@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "up": "rocketry:blocks/temp/TopTexture",
+      "down": "rocketry:blocks/temp/BottomTexture",
+      "north": "rocketry:blocks/temp/FrontTexture",
+      "east": "rocketry:blocks/temp/SideTexture",
+      "west": "rocketry:blocks/temp/SideTexture",
+      "south": "rocketry:blocks/temp/SideTexture",
+      "particle": "rocketry:blocks/temp/FrontTexture"
+    },
+    "model": "minecraft:cube",
+    "transform": "forge:default-block"
+  }
+}

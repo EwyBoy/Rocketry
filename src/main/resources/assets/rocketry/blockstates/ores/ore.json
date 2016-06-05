@@ -1,0 +1,49 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "minecraft:cube_all",
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "inventory": [
+      {}
+    ],
+    "material": {
+      "copper": {
+        "textures": {
+          "all": "rocketry:blocks/ores/ores/Copper"
+        }
+      },
+      "tin": {
+        "textures": {
+          "all": "rocketry:blocks/ores/ores/Tin"
+        }
+      },
+      "silver": {
+        "textures": {
+          "all": "rocketry:blocks/ores/ores/Silver"
+        }
+      },
+      "lead": {
+        "textures": {
+          "all": "rocketry:blocks/ores/ores/Lead"
+        }
+      },
+      "magnesium": {
+        "textures": {
+          "all": "rocketry:blocks/ores/ores/Magnesium"
+        }
+      },
+      "aluminum": {
+        "textures": {
+          "all": "rocketry:blocks/ores/ores/Aluminum"
+        }
+      },
+      "graphite": {
+        "textures": {
+          "all": "rocketry:blocks/ores/ores/Graphite"
+        }
+      }
+    }
+  }
+}
