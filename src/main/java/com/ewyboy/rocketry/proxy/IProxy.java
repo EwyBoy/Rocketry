@@ -57,4 +57,9 @@ public interface IProxy {
      * Register Fluids
      */
     void registerFluids();
+
+    /**
+     *  Register Compatibilities
+     */
+    void registerCompatibilities();
 }

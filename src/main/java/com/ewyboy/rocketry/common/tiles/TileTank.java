@@ -43,7 +43,6 @@ public class TileTank extends TileEntityBase implements IFluidHandler, ITickable
         }
     }*/
 
-    //	IFluidHandler
     @Override
     public int fill(EnumFacing from, FluidStack resource, boolean doFill) {
         if (canFill(from, null)) {
@@ -79,7 +78,7 @@ public class TileTank extends TileEntityBase implements IFluidHandler, ITickable
 
     @Override
     public boolean canFill(EnumFacing from, Fluid fluid) {
-        return  from == EnumFacing.UP || from == null;
+        return  from == EnumFacing.UP || from == EnumFacing.DOWN || from == null;
     }
 
     @Override

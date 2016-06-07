@@ -13,7 +13,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.FMLEventChannel;
@@ -43,7 +42,6 @@ public class Rocketry {
             Logger.info("Pre-Initialization started");
             packetHandler = NetworkRegistry.INSTANCE.newEventDrivenChannel(Reference.ModInfo.ModID);
                 ConfigLoader.init(event.getSuggestedConfigurationFile());
-                FMLInterModComms.sendMessage("Waila", "register", Reference.Path.wailaPath);
                 proxy.registerBlocks();
                 proxy.registerItems();
                 proxy.registerGUIs();
@@ -53,6 +51,7 @@ public class Rocketry {
                 proxy.registerRenderers();
                 proxy.registerWorldGen();
                 proxy.registerFluids();
+                proxy.registerCompatibilities();
                 launchTime += watch.elapsed(TimeUnit.MILLISECONDS);
             Logger.info("Pre-Initialization finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms");
         Logger.info("Pre-Initialization process successfully done");

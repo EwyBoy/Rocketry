@@ -1,6 +1,6 @@
 package com.ewyboy.rocketry.client.render;
 
-import com.ewyboy.rocketry.client.RenderUtils;
+import com.ewyboy.rocketry.client.FluidRenderHelper;
 import com.ewyboy.rocketry.client.model.ModelFluid;
 import com.ewyboy.rocketry.common.tiles.TileTank;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -21,7 +21,7 @@ public class TankRenderer extends TileEntitySpecialRenderer<TileTank> {
 
     private void renderFluid(TileTank te, double x, double y, double z) {
         if (te.tank.getFluid() != null && te.tank.getFluidAmount() > 0) {
-            ResourceLocation fluidTexture = RenderUtils.getTexture(te.tank.getFluid().getFluid());
+            ResourceLocation fluidTexture = FluidRenderHelper.getTexture(te.tank.getFluid().getFluid());
 
             if (fluidTexture != null) {
                 glPushMatrix();
@@ -29,7 +29,7 @@ public class TankRenderer extends TileEntitySpecialRenderer<TileTank> {
                     GL11.glRotatef(180, 1, 0, 0);
                     double fluidPercent = (int) (((double) te.tank.getFluidAmount() / (double) te.tank.getCapacity()) * 100);
                     GL11.glTranslated(0,(-(fluidPercent / 100)) / 2, 0);
-                    GL11.glScaled(1.0, (fluidPercent / 100), 1.0);
+                    GL11.glScaled(1.125, (fluidPercent / 100), 1.125);
 
                     bindTexture(fluidTexture);
                     fluidModel.renderAll();

@@ -1,9 +1,12 @@
 package com.ewyboy.rocketry.common.blocks.misc;
 
 import com.ewyboy.rocketry.client.render.TankRenderer;
+import com.ewyboy.rocketry.common.compatibilities.waila.IWailaUser;
 import com.ewyboy.rocketry.common.loaders.CreativeTabLoader;
 import com.ewyboy.rocketry.common.tiles.TileTank;
 import com.ewyboy.rocketry.common.utility.Reference;
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -27,7 +30,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockTank extends Block implements ITileEntityProvider {
+import java.util.List;
+
+public class BlockTank extends Block implements ITileEntityProvider, IWailaUser {
 
     public BlockTank() {
         super(Material.GLASS);
@@ -39,20 +44,25 @@ public class BlockTank extends Block implements ITileEntityProvider {
         setCreativeTab(CreativeTabLoader.Rocketry);
     }
 
+    private TileTank getTE(IBlockAccess world, BlockPos pos) {
+        return (TileTank) world.getTileEntity(pos);
+    }
+
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-        TileEntity te = world.getTileEntity(pos);
-
-        if (te instanceof TileTank) {
-            ItemStack input = player.getHeldItem(hand);
-            if (FluidUtil.interactWithFluidHandler(input, ((TileTank) te).tank, player)) return true;
+        TileTank te = getTE(world, pos);
+        if (te != null) {
+            if (te.tank.getFluidAmount() != te.tank.getCapacity()) {
+                ItemStack input = player.getHeldItem(hand);
+                if (FluidUtil.interactWithFluidHandler(input, te.tank, player)) return true;
+            }
         }
-        return false;
+        return true;
     }
 
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT;
+        return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
     @Override
@@ -78,7 +88,23 @@ public class BlockTank extends Block implements ITileEntityProvider {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
+    public TileEntity createNewTileEntity(World world, int meta) {
         return new TileTank();
+    }
+
+    @Override
+    public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
+        BlockPos pos = accessor.getPosition();
+        World world = accessor.getWorld();
+        EntityPlayer player = accessor.getPlayer();
+
+        TileTank te = getTE(world, pos);
+
+        if (te != null && te.tank.getFluid() != null && player.isSneaking()) {
+            currenttip.add("Liquid: " + te.tank.getFluid().getLocalizedName());
+            currenttip.add(te.tank.getFluidAmount() + "/" + te.tank.getCapacity() + " mB");
+        }
+
+        return currenttip;
     }
 }

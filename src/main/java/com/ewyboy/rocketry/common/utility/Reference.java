@@ -13,7 +13,7 @@ public class Reference {
     }
 
     public static final class Path {
-        public static final String wailaPath = "com.ewyboy.rocketry.dependencies.Waila.onWailaCall";
+        public static final String wailaPath = "com.ewyboy.rocketry.common.compatibilities.waila.WailaCompatibility.load";
         public static final String clientProxyPath = "com.ewyboy.rocketry.proxy.ClientProxy";
         public static final String commonProxyPath = "com.ewyboy.rocketry.proxy.CommonProxy";
     }

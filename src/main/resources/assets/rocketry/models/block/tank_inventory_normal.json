@@ -1,0 +1,8 @@
+{
+  "parent": "rocketry:tank",
+  "textures": {
+    "bottom": "rocketry:blocks/ores/blocks/Steel",
+    "side": "rocketry:blocks/ores/blocks/Steel",
+    "top": "rocketry:blocks/ores/blocks/Steel"
+  }
+}

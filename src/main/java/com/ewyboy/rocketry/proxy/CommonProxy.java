@@ -3,6 +3,7 @@ package com.ewyboy.rocketry.proxy;
 import com.ewyboy.rocketry.Rocketry;
 import com.ewyboy.rocketry.common.blocks.Blocks;
 import com.ewyboy.rocketry.common.blocks.fluids.BlockFluidBlock;
+import com.ewyboy.rocketry.common.compatibilities.CompatibilityHandler;
 import com.ewyboy.rocketry.common.config.Config;
 import com.ewyboy.rocketry.common.enums.EnumAlloys;
 import com.ewyboy.rocketry.common.enums.EnumOreType;
@@ -158,6 +159,11 @@ public abstract class CommonProxy implements IProxy {
     @Override
     public void registerGUIs() {
         //NetworkRegistry.INSTANCE.registerGuiHandler(Rocketry.instance, new GuiHandler());
+    }
+
+    @Override
+    public void registerCompatibilities() {
+        CompatibilityHandler.registerWaila();
     }
 
     @Override

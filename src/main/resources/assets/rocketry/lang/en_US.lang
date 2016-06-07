@@ -29,7 +29,7 @@ tile.compressor.name=Compressor
 tile.platingpress.name=Plating Press
 tile.engine.name=Engine
 tile.refinery.name=Refinery
-tile.tank.name=Tank
+tile.tank.name=Liquid Storage Tank
 
 #########################################
 ###              Items                ###
