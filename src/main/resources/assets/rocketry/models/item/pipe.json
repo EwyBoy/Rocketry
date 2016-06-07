@@ -1,5 +1,5 @@
 {
-  "parent": "rocketry:blocks/pipe",
+  "parent": "rocketry:block/pipe",
   "display": {
     "thirdperson": {
       "rotation": [ 10, -45, 170 ],

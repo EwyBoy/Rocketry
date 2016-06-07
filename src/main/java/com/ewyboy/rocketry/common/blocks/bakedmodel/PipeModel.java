@@ -14,10 +14,10 @@ import net.minecraftforge.common.model.TRSRTransformation;
 import java.util.Collection;
 import java.util.Collections;
 
-public class ExampleModel implements IModel {
+public class PipeModel implements IModel {
     @Override
     public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
-        return new ExampleBakedModel(state, format, bakedTextureGetter);
+        return new PipeBakedModel(state, format, bakedTextureGetter);
     }
 
     @Override

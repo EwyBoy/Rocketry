@@ -17,14 +17,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ExampleBakedModel implements IBakedModel {
+public class PipeBakedModel implements IBakedModel {
 
-    public static final ModelResourceLocation BAKED_MODEL = new ModelResourceLocation(Reference.ModInfo.ModID + ":bakedmodelblock");
+    public static final ModelResourceLocation BAKED_MODEL = new ModelResourceLocation(Reference.ModInfo.ModID + ":" + Reference.Blocks.pipe);
 
     private TextureAtlasSprite sprite;
     private VertexFormat format;
 
-    public ExampleBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
+    public PipeBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         this.format = format;
         sprite = bakedTextureGetter.apply(new ResourceLocation(Reference.ModInfo.ModID, "blocks/isbmtexture"));
     }
@@ -77,12 +77,12 @@ public class ExampleBakedModel implements IBakedModel {
 
 
         IExtendedBlockState extendedBlockState = (IExtendedBlockState) state;
-        Boolean north = extendedBlockState.getValue(BakedModelBlock.NORTH);
-        Boolean south = extendedBlockState.getValue(BakedModelBlock.SOUTH);
-        Boolean west = extendedBlockState.getValue(BakedModelBlock.WEST);
-        Boolean east = extendedBlockState.getValue(BakedModelBlock.EAST);
-        Boolean up = extendedBlockState.getValue(BakedModelBlock.UP);
-        Boolean down = extendedBlockState.getValue(BakedModelBlock.DOWN);
+        Boolean north = extendedBlockState.getValue(BlockPipe.NORTH);
+        Boolean south = extendedBlockState.getValue(BlockPipe.SOUTH);
+        Boolean west = extendedBlockState.getValue(BlockPipe.WEST);
+        Boolean east = extendedBlockState.getValue(BlockPipe.EAST);
+        Boolean up = extendedBlockState.getValue(BlockPipe.UP);
+        Boolean down = extendedBlockState.getValue(BlockPipe.DOWN);
         List<BakedQuad> quads = new ArrayList<>();
         double o = .4;
 

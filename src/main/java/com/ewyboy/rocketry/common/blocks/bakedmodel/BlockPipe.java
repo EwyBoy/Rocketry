@@ -28,7 +28,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BakedModelBlock extends Block {
+public class BlockPipe extends Block {
 
     // Properties that indicate if there is the same block in a certain direction.
     public static final UnlistedPropertyBlockAvailable NORTH = new UnlistedPropertyBlockAvailable("north");
@@ -38,10 +38,10 @@ public class BakedModelBlock extends Block {
     public static final UnlistedPropertyBlockAvailable UP = new UnlistedPropertyBlockAvailable("up");
     public static final UnlistedPropertyBlockAvailable DOWN = new UnlistedPropertyBlockAvailable("down");
 
-    public BakedModelBlock() {
+    public BlockPipe() {
         super(Material.ROCK);
-        setUnlocalizedName("bakedmodelblock");
-        setRegistryName("bakedmodelblock");
+        setUnlocalizedName(Reference.Blocks.pipe);
+        setRegistryName(Reference.Blocks.pipe);
         GameRegistry.register(this);
         GameRegistry.register(new ItemBlock(this), getRegistryName());
         setCreativeTab(CreativeTabLoader.Rocketry);
@@ -53,7 +53,7 @@ public class BakedModelBlock extends Block {
         StateMapperBase ignoreState = new StateMapperBase() {
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState iBlockState) {
-                return ExampleBakedModel.BAKED_MODEL;
+                return PipeBakedModel.BAKED_MODEL;
             }
         };
         ModelLoader.setCustomStateMapper(this, ignoreState);
@@ -63,7 +63,7 @@ public class BakedModelBlock extends Block {
     public void initItemModel() {
         // For our item model we want to use a normal json model. This has to be called in
         // ClientProxy.init (not preInit) so that's why it is a separate method.
-        Item itemBlock = Item.REGISTRY.getObject(new ResourceLocation(Reference.ModInfo.ModID, "bakedmodelblock"));
+        Item itemBlock = Item.REGISTRY.getObject(new ResourceLocation(Reference.ModInfo.ModID, Reference.Blocks.pipe));
         ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation(getRegistryName(), "inventory");
         final int DEFAULT_ITEM_SUBTYPE = 0;
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);

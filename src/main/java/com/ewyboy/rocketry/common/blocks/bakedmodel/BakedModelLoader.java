@@ -8,17 +8,17 @@ import net.minecraftforge.client.model.IModel;
 
 public class BakedModelLoader implements ICustomModelLoader {
 
-    public static final ExampleModel EXAMPLE_MODEL = new ExampleModel();
+    public static final PipeModel PIPE_MODEL = new PipeModel();
 
 
     @Override
     public boolean accepts(ResourceLocation modelLocation) {
-        return modelLocation.getResourceDomain().equals(Reference.ModInfo.ModID) && "bakedmodelblock".equals(modelLocation.getResourcePath());
+        return modelLocation.getResourceDomain().equals(Reference.ModInfo.ModID) && Reference.Blocks.pipe.equals(modelLocation.getResourcePath());
     }
 
     @Override
     public IModel loadModel(ResourceLocation modelLocation) throws Exception {
-        return EXAMPLE_MODEL;
+        return PIPE_MODEL;
     }
 
     @Override
