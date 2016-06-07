@@ -11,6 +11,7 @@ public class BlockLoader {
     public static BlockPlatingPress platingPress;
     public static BlockCompressor compressor;
     public static BlockTank tank;
+    public static BlockPipe pipe;
 
     public static void loadBlocks() {
         engine = new BlockEngine();
@@ -18,6 +19,7 @@ public class BlockLoader {
         platingPress = new BlockPlatingPress();
         compressor = new BlockCompressor();
         tank = new BlockTank();
+        pipe = new BlockPipe();
     }
 
     @SideOnly(Side.CLIENT)
@@ -27,5 +29,6 @@ public class BlockLoader {
         platingPress.initModel();
         compressor.initModel();
         tank.initModel();
+        pipe.initModel();
     }
 }

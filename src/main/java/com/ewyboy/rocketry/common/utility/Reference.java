@@ -24,5 +24,6 @@ public class Reference {
         public static final String platingPress = "platingpress";
         public static final String engine = "engine";
         public static final String tank = "tank";
+        public static final String pipe = "pipe";
     }
 }
