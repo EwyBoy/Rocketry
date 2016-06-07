@@ -62,10 +62,10 @@ public class PipeBakedModel implements IBakedModel {
 
         UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);
         builder.setTexture(sprite);
-        putVertex(builder, normal, v1.xCoord, v1.yCoord, v1.zCoord, 0, 0);
-        putVertex(builder, normal, v2.xCoord, v2.yCoord, v2.zCoord, 0, 16);
-        putVertex(builder, normal, v3.xCoord, v3.yCoord, v3.zCoord, 16, 16);
-        putVertex(builder, normal, v4.xCoord, v4.yCoord, v4.zCoord, 16, 0);
+            putVertex(builder, normal, v1.xCoord, v1.yCoord, v1.zCoord, 0, 0);
+            putVertex(builder, normal, v2.xCoord, v2.yCoord, v2.zCoord, 0, 16);
+            putVertex(builder, normal, v3.xCoord, v3.yCoord, v3.zCoord, 16, 16);
+            putVertex(builder, normal, v4.xCoord, v4.yCoord, v4.zCoord, 16, 0);
         return builder.build();
     }
 
@@ -76,16 +76,16 @@ public class PipeBakedModel implements IBakedModel {
             return Collections.emptyList();
         }
 
-
         IExtendedBlockState extendedBlockState = (IExtendedBlockState) state;
-        Boolean north = extendedBlockState.getValue(BlockPipe.NORTH);
-        Boolean south = extendedBlockState.getValue(BlockPipe.SOUTH);
-        Boolean west = extendedBlockState.getValue(BlockPipe.WEST);
-        Boolean east = extendedBlockState.getValue(BlockPipe.EAST);
-        Boolean up = extendedBlockState.getValue(BlockPipe.UP);
-        Boolean down = extendedBlockState.getValue(BlockPipe.DOWN);
+            Boolean north = extendedBlockState.getValue(BlockPipe.NORTH);
+            Boolean south = extendedBlockState.getValue(BlockPipe.SOUTH);
+            Boolean west = extendedBlockState.getValue(BlockPipe.WEST);
+            Boolean east = extendedBlockState.getValue(BlockPipe.EAST);
+            Boolean up = extendedBlockState.getValue(BlockPipe.UP);
+            Boolean down = extendedBlockState.getValue(BlockPipe.DOWN);
         List<BakedQuad> quads = new ArrayList<>();
-        double o = .4;
+
+        double o = 0.35;
 
         // For each side we either cap it off if there is no similar block adjacent on that side
         // or else we extend so that we touch the adjacent block:
