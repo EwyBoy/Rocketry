@@ -1,5 +1,6 @@
 package com.ewyboy.rocketry.common.loaders;
 
+import com.ewyboy.rocketry.common.blocks.bakedmodel.BakedModelBlock;
 import com.ewyboy.rocketry.common.blocks.misc.*;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -11,7 +12,7 @@ public class BlockLoader {
     public static BlockPlatingPress platingPress;
     public static BlockCompressor compressor;
     public static BlockTank tank;
-    public static BlockPipe pipe;
+    public static BakedModelBlock bakedModelBlock;
 
     public static void loadBlocks() {
         engine = new BlockEngine();
@@ -19,7 +20,7 @@ public class BlockLoader {
         platingPress = new BlockPlatingPress();
         compressor = new BlockCompressor();
         tank = new BlockTank();
-        pipe = new BlockPipe();
+        bakedModelBlock = new BakedModelBlock();
     }
 
     @SideOnly(Side.CLIENT)
@@ -29,6 +30,11 @@ public class BlockLoader {
         platingPress.initModel();
         compressor.initModel();
         tank.initModel();
-        pipe.initModel();
+        bakedModelBlock.initModel();
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static void initItemModels() {
+        bakedModelBlock.initItemModel();
     }
 }

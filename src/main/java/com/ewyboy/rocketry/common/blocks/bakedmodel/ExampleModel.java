@@ -1,4 +1,4 @@
-package com.ewyboy.rocketry.client.model;
+package com.ewyboy.rocketry.common.blocks.bakedmodel;
 
 import com.ewyboy.rocketry.common.utility.Reference;
 import com.google.common.base.Function;
@@ -14,20 +14,16 @@ import net.minecraftforge.common.model.TRSRTransformation;
 import java.util.Collection;
 import java.util.Collections;
 
-/** Created by EwyBoy **/
-public class PipeModel implements IModel {
-
+public class ExampleModel implements IModel {
     @Override
     public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
-        return new PipeBakedModel(state, format, bakedTextureGetter);
+        return new ExampleBakedModel(state, format, bakedTextureGetter);
     }
 
     @Override
     public Collection<ResourceLocation> getDependencies() {
         return Collections.emptySet();
     }
-
-    //TODO add new texture here
 
     @Override
     public Collection<ResourceLocation> getTextures() {

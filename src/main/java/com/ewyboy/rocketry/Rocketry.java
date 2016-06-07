@@ -64,6 +64,7 @@ public class Rocketry {
                 ItemLoader.loadItems();
                 BlockLoader.loadBlocks();
                 proxy.loadModels();
+                proxy.loadItemModels();
                 proxy.registerRecipes();
                 launchTime += watch.elapsed(TimeUnit.MILLISECONDS);
             Logger.info("Initialization finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms");

@@ -1,13 +1,12 @@
-package com.ewyboy.rocketry.common.utility;
+package com.ewyboy.rocketry.common.blocks.bakedmodel;
 
 import net.minecraftforge.common.property.IUnlistedProperty;
 
-/** Created by EwyBoy **/
-public class UnlistedPropertyBlock implements IUnlistedProperty<Boolean> {
+public class UnlistedPropertyBlockAvailable implements IUnlistedProperty<Boolean> {
 
     private final String name;
 
-    public UnlistedPropertyBlock(String name) {
+    public UnlistedPropertyBlockAvailable(String name) {
         this.name = name;
     }
 

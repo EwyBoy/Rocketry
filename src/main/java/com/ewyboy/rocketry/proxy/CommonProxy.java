@@ -25,6 +25,8 @@ public abstract class CommonProxy implements IProxy {
 
     public void loadModels() {}
 
+    public void loadItemModels() {}
+
     @Override
     public void registerBlocks() {
         Blocks.registerBlocks();

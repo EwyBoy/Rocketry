@@ -1,6 +1,5 @@
-package com.ewyboy.rocketry.client.model;
+package com.ewyboy.rocketry.common.blocks.bakedmodel;
 
-import com.ewyboy.rocketry.common.blocks.misc.BlockPipe;
 import com.ewyboy.rocketry.common.utility.Reference;
 import com.google.common.base.Function;
 import net.minecraft.block.state.IBlockState;
@@ -18,18 +17,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/** Created by EwyBoy **/
-public class PipeBakedModel implements IBakedModel {
+public class ExampleBakedModel implements IBakedModel {
 
-    public static final ModelResourceLocation BAKED_MODEL = new ModelResourceLocation(Reference.ModInfo.ModID + ":" + Reference.Blocks.pipe);
+    public static final ModelResourceLocation BAKED_MODEL = new ModelResourceLocation(Reference.ModInfo.ModID + ":bakedmodelblock");
 
     private TextureAtlasSprite sprite;
     private VertexFormat format;
 
-    public PipeBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
+    public ExampleBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         this.format = format;
         sprite = bakedTextureGetter.apply(new ResourceLocation(Reference.ModInfo.ModID, "blocks/isbmtexture"));
     }
+
 
     private void putVertex(UnpackedBakedQuad.Builder builder, Vec3d normal, double x, double y, double z, float u, float v) {
         for (int e = 0; e < format.getElementCount(); e++) {
@@ -76,13 +75,14 @@ public class PipeBakedModel implements IBakedModel {
             return Collections.emptyList();
         }
 
+
         IExtendedBlockState extendedBlockState = (IExtendedBlockState) state;
-        Boolean north = extendedBlockState.getValue(BlockPipe.NORTH);
-        Boolean south = extendedBlockState.getValue(BlockPipe.SOUTH);
-        Boolean west = extendedBlockState.getValue(BlockPipe.WEST);
-        Boolean east = extendedBlockState.getValue(BlockPipe.EAST);
-        Boolean up = extendedBlockState.getValue(BlockPipe.UP);
-        Boolean down = extendedBlockState.getValue(BlockPipe.DOWN);
+        Boolean north = extendedBlockState.getValue(BakedModelBlock.NORTH);
+        Boolean south = extendedBlockState.getValue(BakedModelBlock.SOUTH);
+        Boolean west = extendedBlockState.getValue(BakedModelBlock.WEST);
+        Boolean east = extendedBlockState.getValue(BakedModelBlock.EAST);
+        Boolean up = extendedBlockState.getValue(BakedModelBlock.UP);
+        Boolean down = extendedBlockState.getValue(BakedModelBlock.DOWN);
         List<BakedQuad> quads = new ArrayList<>();
         double o = .4;
 
