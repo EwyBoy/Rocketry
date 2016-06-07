@@ -1,6 +1,6 @@
 package com.ewyboy.rocketry.proxy;
 
-import com.ewyboy.rocketry.common.blocks.bakedmodel.BakedModelLoader;
+import com.ewyboy.rocketry.common.loaders.BakedModelLoader;
 import com.ewyboy.rocketry.common.loaders.BlockLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 

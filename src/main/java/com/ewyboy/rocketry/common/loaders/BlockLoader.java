@@ -1,6 +1,6 @@
 package com.ewyboy.rocketry.common.loaders;
 
-import com.ewyboy.rocketry.common.blocks.bakedmodel.BlockPipe;
+import com.ewyboy.rocketry.common.blocks.misc.BlockPipe;
 import com.ewyboy.rocketry.common.blocks.misc.*;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

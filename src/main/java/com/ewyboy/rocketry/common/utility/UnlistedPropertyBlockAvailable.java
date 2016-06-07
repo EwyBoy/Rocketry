@@ -1,4 +1,4 @@
-package com.ewyboy.rocketry.common.blocks.bakedmodel;
+package com.ewyboy.rocketry.common.utility;
 
 import net.minecraftforge.common.property.IUnlistedProperty;
 

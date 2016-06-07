@@ -1,5 +1,6 @@
-package com.ewyboy.rocketry.common.blocks.bakedmodel;
+package com.ewyboy.rocketry.client.model;
 
+import com.ewyboy.rocketry.client.model.bakedmodel.PipeBakedModel;
 import com.ewyboy.rocketry.common.utility.Reference;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableSet;

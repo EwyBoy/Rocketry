@@ -1,5 +1,6 @@
-package com.ewyboy.rocketry.common.blocks.bakedmodel;
+package com.ewyboy.rocketry.common.loaders;
 
+import com.ewyboy.rocketry.client.model.PipeModel;
 import com.ewyboy.rocketry.common.utility.Reference;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;

@@ -1,5 +1,6 @@
-package com.ewyboy.rocketry.common.blocks.bakedmodel;
+package com.ewyboy.rocketry.client.model.bakedmodel;
 
+import com.ewyboy.rocketry.common.blocks.misc.BlockPipe;
 import com.ewyboy.rocketry.common.utility.Reference;
 import com.google.common.base.Function;
 import net.minecraft.block.state.IBlockState;
