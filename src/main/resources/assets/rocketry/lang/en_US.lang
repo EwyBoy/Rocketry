@@ -30,7 +30,7 @@ tile.platingpress.name=Plating Press
 tile.engine.name=Engine
 tile.refinery.name=Refinery
 tile.tank.name=Liquid Storage Tank
-tile.tank.name=Pipe
+tile.pipe.name=Pipe
 
 #########################################
 ###              Items                ###
