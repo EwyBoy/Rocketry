@@ -66,6 +66,7 @@ public class BlockAlloyBlock extends BlockBase implements IProvideRecipe {
                         "xxx",
                         "xxx",
                         "xxx",
+
                         'x', "ingot" + ore.getAlloyName())
                 );
             }

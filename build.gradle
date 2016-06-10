@@ -51,7 +51,7 @@ minecraft {
 
 dependencies {
     deobfCompile "net.darkhax.tesla:Tesla:1.9.4-1.1.0.24"
-	deobfCompile "mcp.mobius.waila:waila:1.7.0-B3_1.9.4"
+	deobfCompile "mcp.mobius.waila:Waila:1.7.0-B3_1.9.4"
 	deobfCompile "mezz.jei:jei_1.9.4:3.4.0.204"
 	deobfCompile "MCMultiPart:MCMultiPart-experimental:1.2.0_72:universal"
 }

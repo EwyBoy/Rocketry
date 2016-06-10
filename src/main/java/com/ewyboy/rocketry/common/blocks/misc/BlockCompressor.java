@@ -1,9 +1,12 @@
 package com.ewyboy.rocketry.common.blocks.misc;
 
 import com.ewyboy.rocketry.client.render.CompressorRenderer;
+import com.ewyboy.rocketry.common.compatibilities.waila.IWailaUser;
 import com.ewyboy.rocketry.common.loaders.CreativeTabLoader;
 import com.ewyboy.rocketry.common.tiles.TileCompressor;
 import com.ewyboy.rocketry.common.utility.Reference;
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -26,8 +29,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
-public class BlockCompressor extends net.minecraft.block.Block implements ITileEntityProvider {
+public class BlockCompressor extends net.minecraft.block.Block implements ITileEntityProvider, IWailaUser {
 
     public BlockCompressor() {
         super(Material.IRON);
@@ -118,5 +122,18 @@ public class BlockCompressor extends net.minecraft.block.Block implements ITileE
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
         return new TileCompressor();
+    }
+
+    @Override
+    public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
+        TileCompressor te = getTE(accessor.getWorld(), accessor.getPosition());
+
+        if (te instanceof TileCompressor) {
+            ItemStack item = te.getStack();
+            if (te.getStack() != null) {
+                currenttip.add("Contains: " + item.getDisplayName());
+            }
+        }
+        return currenttip;
     }
 }

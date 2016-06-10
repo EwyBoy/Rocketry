@@ -66,6 +66,7 @@ public class BlockOreBlock extends BlockBase implements IProvideRecipe {
                         "xxx",
                         "xxx",
                         "xxx",
+
                         'x', "ingot" + ore.getOreName())
                 );
             }

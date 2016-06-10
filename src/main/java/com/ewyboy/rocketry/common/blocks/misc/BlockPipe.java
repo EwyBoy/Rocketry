@@ -1,10 +1,10 @@
 package com.ewyboy.rocketry.common.blocks.misc;
 
 import com.ewyboy.rocketry.client.model.bakedmodel.PipeBakedModel;
-import com.ewyboy.rocketry.common.utility.UnlistedPropertyBlockAvailable;
 import com.ewyboy.rocketry.common.loaders.BlockLoader;
 import com.ewyboy.rocketry.common.loaders.CreativeTabLoader;
 import com.ewyboy.rocketry.common.utility.Reference;
+import com.ewyboy.rocketry.common.utility.UnlistedPropertyBlockAvailable;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;

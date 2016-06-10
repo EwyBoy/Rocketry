@@ -7,8 +7,13 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 
 public class TileCompressor extends TileEntityBase {
+
+    public TileCompressor compressor;
     
     private ItemStack stack;
+
+    public TileCompressor() {
+    }
 
     public ItemStack getStack() {
         return stack;

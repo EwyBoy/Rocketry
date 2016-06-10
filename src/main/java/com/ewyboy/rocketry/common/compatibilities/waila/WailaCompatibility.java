@@ -1,5 +1,7 @@
 package com.ewyboy.rocketry.common.compatibilities.waila;
 
+import com.ewyboy.rocketry.common.blocks.misc.BlockCompressor;
+import com.ewyboy.rocketry.common.blocks.misc.BlockPlatingPress;
 import com.ewyboy.rocketry.common.blocks.misc.BlockTank;
 import com.ewyboy.rocketry.common.utility.Reference;
 import mcp.mobius.waila.api.IWailaConfigHandler;
@@ -36,13 +38,20 @@ public class WailaCompatibility implements IWailaDataProvider {
             registrar.registerHeadProvider(INSTANCE, BlockTank.class);
             registrar.registerBodyProvider(INSTANCE, BlockTank.class);
             registrar.registerTailProvider(INSTANCE, BlockTank.class);
+
+            registrar.registerHeadProvider(INSTANCE, BlockCompressor.class);
+            registrar.registerBodyProvider(INSTANCE, BlockCompressor.class);
+            registrar.registerTailProvider(INSTANCE, BlockCompressor.class);
+
+            registrar.registerHeadProvider(INSTANCE, BlockPlatingPress.class);
+            registrar.registerBodyProvider(INSTANCE, BlockPlatingPress.class);
+            registrar.registerTailProvider(INSTANCE, BlockPlatingPress.class);
             loaded = true;
         }
     }
 
     public static void register() {
-        if (registered)
-            return;
+        if (registered) return;
         registered = true;
         FMLInterModComms.sendMessage("Waila", "register", Reference.Path.wailaPath);
     }

@@ -9,7 +9,6 @@ import static sun.java2d.opengl.OGLRenderQueue.sync;
 
 public class TileTank extends TileEntityBase implements IFluidHandler, ITickable {
 
-
     public FluidTank tank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 8);
     private int prevAmount = tank.getFluidAmount();
 
@@ -52,6 +51,7 @@ public class TileTank extends TileEntityBase implements IFluidHandler, ITickable
         }
         return 0;
     }
+
 
     @Override
     public FluidStack drain(EnumFacing from, FluidStack resource, boolean doDrain) {

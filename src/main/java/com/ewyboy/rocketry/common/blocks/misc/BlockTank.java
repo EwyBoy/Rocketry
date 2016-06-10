@@ -34,6 +34,9 @@ import java.util.List;
 
 public class BlockTank extends Block implements ITileEntityProvider, IWailaUser {
 
+
+    //TODO Make tank glow if liquid is
+
     public BlockTank() {
         super(Material.GLASS);
         setUnlocalizedName(Reference.Blocks.tank);
@@ -51,11 +54,9 @@ public class BlockTank extends Block implements ITileEntityProvider, IWailaUser 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         TileTank te = getTE(world, pos);
-        if (te != null) {
-            if (te.tank.getFluidAmount() != te.tank.getCapacity()) {
-                ItemStack input = player.getHeldItem(hand);
-                if (FluidUtil.interactWithFluidHandler(input, te.tank, player)) return true;
-            }
+        if (te instanceof TileTank) {
+            ItemStack input = player.getHeldItem(hand);
+            if (FluidUtil.interactWithFluidHandler(input, te.tank, player)) return true;
         }
         return true;
     }
@@ -100,11 +101,45 @@ public class BlockTank extends Block implements ITileEntityProvider, IWailaUser 
 
         TileTank te = getTE(world, pos);
 
-        if (te != null && te.tank.getFluid() != null && player.isSneaking()) {
-            currenttip.add("Liquid: " + te.tank.getFluid().getLocalizedName());
-            currenttip.add(te.tank.getFluidAmount() + "/" + te.tank.getCapacity() + " mB");
+        if (player.isSneaking()) {
+            if (te instanceof TileTank) {
+                if (te.tank.getFluid() != null) {
+                    currenttip.add("Liquid: " + te.tank.getFluid().getLocalizedName());
+                } else {
+                    currenttip.add("Liquid: " + "EMPTY");
+                }
+                currenttip.add(te.tank.getFluidAmount() + "/" + te.tank.getCapacity() + " mB");
+            }
         }
-
         return currenttip;
     }
+
+    protected String resourcePath = "tank";
+
+    /*@Override
+    public void registerBlockRenderer() {
+        final String resourcePath = String.format("%s:%s", Reference.ModInfo.ModID, this.resourcePath);
+
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                return new ModelResourceLocation(resourcePath, getPropertyString(state.getProperties()));
+            }
+        });
+    }
+
+    @Override
+    public void registerBlockItemRenderer() {
+        final String resourcePath = String.format("%s:%s", Reference.ModInfo.ModID, this.resourcePath);
+
+        List<ItemStack> subBlocks = new ArrayList<>();
+        getSubBlocks(Item.getItemFromBlock(this), null, subBlocks);
+
+        for (ItemStack itemStack : subBlocks) {
+            IBlockState blockState = this.getStateFromMeta(itemStack.getItemDamage());
+
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), itemStack.getItemDamage(), new ModelResourceLocation(resourcePath, Platform.getPropertyString(blockState.getProperties())));
+
+        }
+    }*/
 }

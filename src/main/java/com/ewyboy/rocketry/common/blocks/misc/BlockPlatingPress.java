@@ -1,9 +1,12 @@
 package com.ewyboy.rocketry.common.blocks.misc;
 
 import com.ewyboy.rocketry.client.render.PlatingPressRenderer;
+import com.ewyboy.rocketry.common.compatibilities.waila.IWailaUser;
 import com.ewyboy.rocketry.common.loaders.CreativeTabLoader;
 import com.ewyboy.rocketry.common.tiles.TilePlatingPress;
 import com.ewyboy.rocketry.common.utility.Reference;
+import mcp.mobius.waila.api.IWailaConfigHandler;
+import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -27,8 +30,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
-public class BlockPlatingPress extends Block implements ITileEntityProvider {
+public class BlockPlatingPress extends Block implements ITileEntityProvider, IWailaUser {
 
     public BlockPlatingPress() {
         super(Material.IRON);
@@ -110,5 +114,19 @@ public class BlockPlatingPress extends Block implements ITileEntityProvider {
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
         return new TilePlatingPress();
+    }
+
+
+    @Override
+    public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
+        TilePlatingPress te = getTE(accessor.getWorld(), accessor.getPosition());
+
+        if (te instanceof TilePlatingPress) {
+            ItemStack item = te.getStack();
+            if (te.getStack() != null) {
+                currenttip.add("Contains: " + item.getDisplayName());
+            }
+        }
+        return currenttip;
     }
 }
