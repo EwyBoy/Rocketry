@@ -18,6 +18,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
@@ -30,13 +31,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class BlockTank extends Block implements ITileEntityProvider, IWailaUser {
-
-
-    //TODO Make tank glow if liquid is
-
+    
     public BlockTank() {
         super(Material.GLASS);
         setUnlocalizedName(Reference.Blocks.tank);
@@ -49,6 +48,16 @@ public class BlockTank extends Block implements ITileEntityProvider, IWailaUser 
 
     private TileTank getTE(IBlockAccess world, BlockPos pos) {
         return (TileTank) world.getTileEntity(pos);
+    }
+
+    @Override
+    public int getLightValue(@Nonnull IBlockState state, IBlockAccess world, @Nonnull BlockPos pos) {
+        TileEntity te = world.getTileEntity(pos);
+        if(!(te instanceof TileTank)) {
+            return 0;
+        }
+        TileTank tank = (TileTank) te;
+        return tank.getBrightness();
     }
 
     @Override
@@ -114,32 +123,9 @@ public class BlockTank extends Block implements ITileEntityProvider, IWailaUser 
         return currenttip;
     }
 
-    protected String resourcePath = "tank";
-
-    /*@Override
-    public void registerBlockRenderer() {
-        final String resourcePath = String.format("%s:%s", Reference.ModInfo.ModID, this.resourcePath);
-
-        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
-            @Override
-            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                return new ModelResourceLocation(resourcePath, getPropertyString(state.getProperties()));
-            }
-        });
-    }
 
     @Override
-    public void registerBlockItemRenderer() {
-        final String resourcePath = String.format("%s:%s", Reference.ModInfo.ModID, this.resourcePath);
-
-        List<ItemStack> subBlocks = new ArrayList<>();
-        getSubBlocks(Item.getItemFromBlock(this), null, subBlocks);
-
-        for (ItemStack itemStack : subBlocks) {
-            IBlockState blockState = this.getStateFromMeta(itemStack.getItemDamage());
-
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), itemStack.getItemDamage(), new ModelResourceLocation(resourcePath, Platform.getPropertyString(blockState.getProperties())));
-
-        }
-    }*/
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
+    }
 }

@@ -3,6 +3,7 @@ package com.ewyboy.rocketry.client.render;
 import com.ewyboy.rocketry.client.FluidRenderHelper;
 import com.ewyboy.rocketry.client.model.ModelFluid;
 import com.ewyboy.rocketry.common.tiles.TileTank;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -30,8 +31,8 @@ public class TankRenderer extends TileEntitySpecialRenderer<TileTank> {
                     double fluidPercent = (int) (((double) te.tank.getFluidAmount() / (double) te.tank.getCapacity()) * 100);
                     GL11.glTranslated(0,(-(fluidPercent / 100)) / 2, 0);
                     GL11.glScaled(1.125, (fluidPercent / 100), 1.125);
-
                     bindTexture(fluidTexture);
+                    OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 242, 242);
                     fluidModel.renderAll();
                 glPopMatrix();
             }

@@ -12,6 +12,18 @@ public class TileTank extends TileEntityBase implements IFluidHandler, ITickable
     public FluidTank tank = new FluidTank(FluidContainerRegistry.BUCKET_VOLUME * 8);
     private int prevAmount = tank.getFluidAmount();
 
+
+    public boolean containsFluid() {
+        return tank.getFluid() != null;
+    }
+
+    public int getBrightness() {
+        if(containsFluid()) {
+            return tank.getFluid().getFluid().getLuminosity();
+        }
+        return 0;
+    }
+
     private void save() {
         markDirty();
         if (Math.abs(prevAmount - tank.getFluidAmount()) >= 1000) {
