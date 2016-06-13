@@ -10,6 +10,7 @@ import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkGenerator;
 import net.minecraft.world.chunk.IChunkProvider;
@@ -25,7 +26,6 @@ import java.util.List;
 import java.util.Random;
 
 public class WorldGen implements IWorldGenerator {
-
     private static List<OreGen> oreSpawnList = new ArrayList<>();
     private static ArrayListMultimap<Integer, ChunkInfo> retrogenChunks = ArrayListMultimap.create();
     private int numChunks = 2;
@@ -43,7 +43,7 @@ public class WorldGen implements IWorldGenerator {
         }
     }
 
-   /* private void reGenerateOres(Random random, ChunkInfo chunkInfo, World world) {
+    private void reGenerateOres(Random random, ChunkInfo chunkInfo, World world) {
         for (OreGen gen : oreSpawnList) {
             if (!chunkInfo.getTagCompound().getBoolean(gen.name)) {
                 gen.generate(world, random,
@@ -51,7 +51,7 @@ public class WorldGen implements IWorldGenerator {
                         chunkInfo.getCoordIntPair().chunkZPos * 16);
             }
         }
-    }*/
+    }
 
     private boolean retrogenEnabled() {
         return retrogenEnable;
@@ -87,18 +87,20 @@ public class WorldGen implements IWorldGenerator {
     @SubscribeEvent
     public void chunkLoad(ChunkDataEvent.Load event) {
         int dimID = event.getWorld().provider.getDimension();
-        if (!retrogenEnabled()) return;
+        if (!retrogenEnabled())
+            return;
 
-        /*NBTTagCompound tag = event.getData().getCompoundTag("Rocketry");
+        NBTTagCompound tag = event.getData().getCompoundTag("AppliedLogistics");
         if ((!tag.hasKey("DEFAULT")) || retroGenRequired(tag)) {
-            Logger.info("Chunk " + event.getChunk().getChunkCoordIntPair() + " has been flagged for Ore RetroGen by " + Reference.ModInfo.ModName);
+            Logger.info("Chunk " + event.getChunk().getChunkCoordIntPair() + " has been flagged for Ore RetroGen by Applied Logistics");
             retrogenChunks.put(dimID, new ChunkInfo(event.getChunk().getChunkCoordIntPair(), tag));
-        }*/
+        }
     }
 
     @SubscribeEvent
     public void serverWorldTick(TickEvent.WorldTickEvent event) {
-        if ((event.side == Side.CLIENT) || (event.phase == TickEvent.Phase.START)) return;
+        if ((event.side == Side.CLIENT) || (event.phase == TickEvent.Phase.START))
+            return;
 
         int dimID = event.world.provider.getDimension();
         int counter = 0;
@@ -119,15 +121,16 @@ public class WorldGen implements IWorldGenerator {
 
                 counter++;
 
-               /* ChunkPos chunkCoordIntPair = chunks.get(index).getCoordIntPair();
+                ChunkPos chunkCoordIntPair = chunks.get(index).getCoordIntPair();
                 long worldSeed = event.world.getSeed();
                 Random fmlRandom = new Random(worldSeed);
                 long xSeed = fmlRandom.nextLong() >> 3;
                 long zSeed = fmlRandom.nextLong() >> 3;
                 fmlRandom.setSeed(xSeed * chunkCoordIntPair.chunkXPos + zSeed * chunkCoordIntPair.chunkZPos ^ worldSeed);
                 reGenerateOres(fmlRandom, chunks.get(index), event.world);
-                chunks.remove(index);*/
+                chunks.remove(index);
             }
+
             if (counter > 0) Logger.info("Retrogen was performed on " + counter + " Chunks, " + Math.max(0, chunks.size()) + " chunks remaining");
         }
     }
@@ -161,17 +164,17 @@ public class WorldGen implements IWorldGenerator {
     }
 
     private static class ChunkInfo {
-        /*private ChunkCoordIntPair coordIntPair;*/
+        private ChunkPos coordIntPair;
         private NBTTagCompound tagCompound;
 
-        /*public ChunkInfo(ChunkCoordIntPair coordIntPair, NBTTagCompound tagCompound) {
+        public ChunkInfo(ChunkPos coordIntPair, NBTTagCompound tagCompound) {
             this.coordIntPair = coordIntPair;
             this.tagCompound = tagCompound;
         }
 
-        public ChunkCoordIntPair getCoordIntPair() {
+        public ChunkPos getCoordIntPair() {
             return coordIntPair;
-        }*/
+        }
 
         public NBTTagCompound getTagCompound() {
             return tagCompound;

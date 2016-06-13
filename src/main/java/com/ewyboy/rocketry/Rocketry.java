@@ -1,7 +1,6 @@
 package com.ewyboy.rocketry;
 
 import com.ewyboy.rocketry.common.loaders.BlockLoader;
-import com.ewyboy.rocketry.common.loaders.ConfigLoader;
 import com.ewyboy.rocketry.common.loaders.ItemLoader;
 import com.ewyboy.rocketry.common.utility.Logger;
 import com.ewyboy.rocketry.common.utility.Reference;
@@ -41,7 +40,7 @@ public class Rocketry {
         Stopwatch watch = Stopwatch.createStarted();
             Logger.info("Pre-Initialization started");
             packetHandler = NetworkRegistry.INSTANCE.newEventDrivenChannel(Reference.ModInfo.ModID);
-                ConfigLoader.init(event.getSuggestedConfigurationFile());
+                proxy.registerConfiguration(event.getSuggestedConfigurationFile());
                 proxy.registerBlocks();
                 proxy.registerItems();
                 proxy.registerGUIs();

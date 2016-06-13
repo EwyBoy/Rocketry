@@ -1,7 +1,18 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "model": "rocketry:tank",
+    "transform": "forge:default-block"
+  },
   "variants": {
     "normal": {
       "model": "rocketry:tank"
-    }
+    },
+    "inventory": [
+      {}
+    ]
+  },
+  "inventory": {
+      "model": "rocketry:tank"
   }
 }

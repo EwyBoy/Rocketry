@@ -1,13 +1,13 @@
 package com.ewyboy.rocketry.common.blocks;
 
 import com.ewyboy.rocketry.common.tiles.TileEntityBase;
-import com.ewyboy.rocketry.common.utility.*;
+import com.ewyboy.rocketry.common.utility.Platform;
+import com.ewyboy.rocketry.common.utility.Reference;
 import com.ewyboy.rocketry.common.utility.helpers.TileHelper;
 import com.ewyboy.rocketry.common.utility.interfaces.IBlockRenderer;
 import com.ewyboy.rocketry.common.utility.interfaces.IOrientable;
 import com.ewyboy.rocketry.common.utility.interfaces.IOrientableBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -29,19 +29,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BlockBase extends Block implements IBlockRenderer {
-
     protected boolean isInventory = false;
     protected String resourcePath = "";
     protected String internalName = "";
+    protected boolean fallInstantly = false;
 
     protected BlockBase(Material material, String resourcePath) {
         super(material);
-        setSoundType(SoundType.STONE);
+
+        //setStepSound(SoundType.STONE);
         setHardness(2.2F);
         setResistance(5.0F);
         setHarvestLevel("pickaxe", 0);
         this.resourcePath = resourcePath;
     }
+
+    @Override
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+        if (hasGravity(worldIn, pos))
+            worldIn.scheduleUpdate(pos, this, 2);
+
+        super.onBlockAdded(worldIn, pos, state);
+    }
+
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn) {
+        if (hasGravity(worldIn, pos))
+            worldIn.scheduleUpdate(pos, this, 2);
+
+        super.neighborChanged(state, worldIn, pos, blockIn);
+    }
+
+    public static boolean func_185759_i(IBlockState p_185759_0_) {
+        Block block = p_185759_0_.getBlock();
+        Material material = p_185759_0_.getMaterial();
+        return block == net.minecraft.init.Blocks.FIRE || material == Material.AIR || material == Material.WATER || material == Material.LAVA;
+    }
+
 
     public String getInternalName() {
         return internalName;
@@ -49,6 +73,10 @@ public abstract class BlockBase extends Block implements IBlockRenderer {
 
     public void setInternalName(String internalName) {
         this.internalName = internalName;
+    }
+
+    public boolean hasGravity(World worldIn, BlockPos pos) {
+        return false;
     }
 
     @Override

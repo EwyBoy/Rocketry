@@ -54,6 +54,13 @@ public class ConfigWorldGen {
                     defaultConfig.Weight = 20;
                     break;
 
+                case GRAPHITE:
+                    defaultConfig.MinY = 1;
+                    defaultConfig.MaxY = 75;
+                    defaultConfig.VeinSize = 20;
+                    defaultConfig.Weight = 30;
+                    break;
+
                 case MAGNESIUM:
                     defaultConfig.MinY = 5;
                     defaultConfig.MaxY = 60;
@@ -61,14 +68,13 @@ public class ConfigWorldGen {
                     defaultConfig.Weight = 20;
                     break;
 
-                case GRAPHITE:
-                    defaultConfig.MinY = 1;
-                    defaultConfig.MaxY = 75;
-                    defaultConfig.VeinSize = 20;
+                case ALUMINUM:
+                    defaultConfig.MinY = 42;
+                    defaultConfig.MaxY = 76;
+                    defaultConfig.VeinSize = 8;
                     defaultConfig.Weight = 30;
                     break;
             }
-
             OreWorldGenDefaults.put(ore, defaultConfig);
         }
     }
@@ -130,7 +136,6 @@ public class ConfigWorldGen {
                     return rt;
                 }
             }
-
             return def;
         }
     }
@@ -147,10 +152,8 @@ public class ConfigWorldGen {
 
         public boolean isEnabledForDim(int dim) {
             boolean inList = false;
-            for (int listDim : Dimensions)
-                inList = inList || listDim == dim;
-            return (inList && DimensionRestriction == RestrictionType.Whitelist) ||
-                    (!inList && DimensionRestriction == RestrictionType.Blacklist);
+            for (int listDim : Dimensions) inList = inList || listDim == dim;
+            return (inList && DimensionRestriction == RestrictionType.Whitelist) || (!inList && DimensionRestriction == RestrictionType.Blacklist);
         }
     }
 }

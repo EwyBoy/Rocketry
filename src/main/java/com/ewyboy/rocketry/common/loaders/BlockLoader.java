@@ -29,12 +29,13 @@ public class BlockLoader {
         refinery.initModel();
         platingPress.initModel();
         compressor.initModel();
-        tank.initModel();
+        tank.registerBlockRenderer();
         bakedModelBlock.initModel();
     }
 
     @SideOnly(Side.CLIENT)
     public static void initItemModels() {
         bakedModelBlock.initItemModel();
+        tank.registerBlockItemRenderer();
     }
 }

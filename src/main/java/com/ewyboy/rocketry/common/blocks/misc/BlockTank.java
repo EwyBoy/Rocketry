@@ -1,10 +1,11 @@
 package com.ewyboy.rocketry.common.blocks.misc;
 
-import com.ewyboy.rocketry.client.render.TankRenderer;
 import com.ewyboy.rocketry.common.compatibilities.waila.IWailaUser;
 import com.ewyboy.rocketry.common.loaders.CreativeTabLoader;
 import com.ewyboy.rocketry.common.tiles.TileTank;
+import com.ewyboy.rocketry.common.utility.Platform;
 import com.ewyboy.rocketry.common.utility.Reference;
+import com.ewyboy.rocketry.common.utility.interfaces.IBlockRenderer;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.block.Block;
@@ -12,6 +13,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -26,16 +28,18 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.List;
 
-public class BlockTank extends Block implements ITileEntityProvider, IWailaUser {
-    
+public class BlockTank extends Block implements ITileEntityProvider, IWailaUser, IBlockRenderer {
+
+    protected String resourcePath = "";
+
     public BlockTank() {
         super(Material.GLASS);
         setUnlocalizedName(Reference.Blocks.tank);
@@ -70,6 +74,9 @@ public class BlockTank extends Block implements ITileEntityProvider, IWailaUser 
         return true;
     }
 
+
+    @Nonnull
+    @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
@@ -91,10 +98,33 @@ public class BlockTank extends Block implements ITileEntityProvider, IWailaUser 
         return false;
     }
 
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
+    }
+
     @SideOnly(Side.CLIENT)
-    public void initModel() {
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
-        ClientRegistry.bindTileEntitySpecialRenderer(TileTank.class, new TankRenderer());
+    @Override
+    public void registerBlockRenderer() {
+        final String resourcePath = String.format("%s:%s", Reference.ModInfo.ModID, this.resourcePath);
+
+        ModelLoader.setCustomStateMapper(this, new DefaultStateMapper() {
+            @Override
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                return new ModelResourceLocation(resourcePath, getPropertyString(state.getProperties()));
+            }
+        });
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void registerBlockItemRenderer() {
+        final String resourcePath = String.format("%s:%s", Reference.ModInfo.ModID, this.resourcePath);
+
+        List<ItemStack> subBlocks = new ArrayList<>();
+        getSubBlocks(Item.getItemFromBlock(this), null, subBlocks);
+
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), new ModelResourceLocation(resourcePath, "inventory"));
     }
 
     @Override
@@ -121,11 +151,5 @@ public class BlockTank extends Block implements ITileEntityProvider, IWailaUser 
             }
         }
         return currenttip;
-    }
-
-
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
     }
 }

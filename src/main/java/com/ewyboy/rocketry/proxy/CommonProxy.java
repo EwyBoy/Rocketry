@@ -14,6 +14,7 @@ import com.ewyboy.rocketry.common.utility.helpers.FluidHelper;
 import com.ewyboy.rocketry.common.utility.interfaces.IProvideEvent;
 import com.ewyboy.rocketry.common.utility.interfaces.IProvideRecipe;
 import com.ewyboy.rocketry.common.utility.interfaces.IProvideSmelting;
+import com.ewyboy.rocketry.common.world.WorldGenInit;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -97,7 +98,7 @@ public abstract class CommonProxy implements IProxy {
                 OreDictionary.registerOre("plate" + oreName, Items.ITEM_ALLOY_PLATE.getStack(1, meta));
         }
 
-       /* // Register Gears
+        /*// Register Gears
         for (EnumMaterialsGear gear : EnumMaterialsGear.values()) {
             OreDictionary.registerOre("gear" + gear.getOreName(), Items.ITEM_MATERIAL_GEAR.getStack(1, gear.getMeta()));
         }*/
@@ -175,7 +176,7 @@ public abstract class CommonProxy implements IProxy {
 
     @Override
     public void registerWorldGen() {
-        //WorldGenInit.init();
+        WorldGenInit.init();
     }
 
     @Override

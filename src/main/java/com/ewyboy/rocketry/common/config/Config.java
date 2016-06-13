@@ -12,13 +12,14 @@ import java.io.File;
 import java.util.Arrays;
 
 public class Config extends GuiConfig {
+
     public static final String CONFIG_WORLDGEN = "worldgen";
     public static Configuration configuration;
 
     public Config(GuiScreen parentScreen) {
         super(
                 parentScreen,
-                Arrays.asList(new IConfigElement[]{
+                Arrays.asList(new IConfigElement[] {
                         new ConfigElement(Rocketry.configuration.getCategory(CONFIG_WORLDGEN)),
                 }),
                 Reference.ModInfo.ModID, false, false, "Rocketry Configuration");
@@ -35,7 +36,6 @@ public class Config extends GuiConfig {
 
     public static void loadConfiguration() {
         ConfigWorldGen.init(configuration);
-
         configuration.save();
     }
 }
